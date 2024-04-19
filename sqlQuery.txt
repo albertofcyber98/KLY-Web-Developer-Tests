@@ -1,0 +1,15 @@
+SELECT
+    p.id,
+    p.title,
+    GROUP_CONCAT(DISTINCT pc.category ORDER BY pc.category) AS categories,
+    'red' AS tag
+FROM
+    posts p
+JOIN
+    post_tags pt ON p.id = pt.post_id
+JOIN
+    post_categories pc ON p.id = pc.post_id
+WHERE
+    pt.tag = 'red'
+GROUP BY
+    p.id, p.title;
